@@ -20,12 +20,19 @@ class AuthController extends Controller
     
         // $user = User::create($registerdData);
         $user = User::create([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'role_id' => 1,
+            'nic_no' => $request->nic_no,
             'email' => $request->email,
+            'first_name' => $request->first_name,
+            'first_name' => $request->first_name,
             'password' => Hash::make($request->password),
-            'phone_number' => $request->phone_number,
+            'mobile_number' => $request->mobile_number,
             'district' => $request->district,
-            'nic_no' => $request->nic_no
+            'nic_no' => $request->nic_no,
+
+            $table->bigInteger('role_id');
         ]);
     
         $accessToken = $user->createToken('authToken')->accessToken;
@@ -38,6 +45,7 @@ class AuthController extends Controller
     {
         $loginData = $request->validate([
             'email' => 'required|string|email',
+            'mobile_no' => 'required|string|mobile_no',
             'password' => 'required|string',
         ]);
     

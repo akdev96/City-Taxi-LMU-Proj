@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Role;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,8 +17,25 @@ class DatabaseSeeder extends Seeder
     // User::factory(10)->create();
 
     User::factory()->create([
-      'name' => 'Test User',
-      'email' => 'test@example.com',
+      'name' => 'Admin',
+      'email' => 'admin@citytaxi.local',
+      'role_id' => 1,
+      'first_name' => 'Application',
+      'last_name' => 'Admin',
+      'nic_no' => '123456789V',
+      'profile_pic' => '',
+      'mobile_no' => '0712345678',
+      'birth_day' => '1996/02/07',
+      'address' => 'Local Address, City, Country',
+      'city' => 'Colombo',
+      'district' => 'Colombo'
+    ]);
+
+    Role::factory()->createMany([
+      ['role_name' => 'admin'],
+      ['role_name' => 'agent'],
+      ['role_name' => 'driver'],
+      ['role_name' => 'passanger']
     ]);
   }
 }

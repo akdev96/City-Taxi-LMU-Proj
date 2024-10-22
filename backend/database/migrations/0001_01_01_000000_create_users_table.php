@@ -13,13 +13,19 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->bigInteger('role_id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('nic_no')->unique();;
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('phone_number');
-            $table->string('district');
-            $table->string('nic_no');
+            $table->string('profile_pic');
+            $table->string('mobile_number');
+            $table->date('birth_day');
+            $table->text('address');
+            $table->text('city');
+            $table->text('district');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -38,6 +44,11 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::create('roles', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->string('role_name');
+        });
     }
 
     /**
@@ -48,5 +59,6 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('roles');
     }
 };
